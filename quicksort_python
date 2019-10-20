@@ -1,0 +1,41 @@
+import random
+  
+def partition(arr,left,right):
+    i = ( left-1 )
+    pivot = arr[right]
+  
+    for j in range(left , right):
+  
+        if   arr[j] < p:
+          
+            i = i+1 
+            arr[i],arr[j] = arr[j],arr[i] 
+  
+    arr[i+1],arr[right] = arr[right],arr[i+1]
+    return ( i+1 )
+    
+def quickSort(arr,left,right):
+    if left < right:
+  
+        p = partition(arr,left,right)
+  
+        quickSort(arr, left, p-1)
+        quickSort(arr, p+1, right)
+  
+def main() :
+  arr = []
+  N = 10
+  for i in range(N):
+    arr.append(random.randrange(100))
+
+  print ("Non sorted array is:") 
+  for i in range(N): 
+    print ("%d " %arr[i], end=''), 
+  print()
+  
+  quickSort(arr,0,N-1) 
+  print ("Sorted array is:") 
+  for i in range(N): 
+    print ("%d " %arr[i], end=''),
+	
+main()
