@@ -1,0 +1,67 @@
+#include <iostream>
+
+using namespace std;
+
+void swap(int* a, int* b)
+{
+    int t = *a;
+    *a = *b;
+    *b = t;
+}
+  
+int partition (int arr[], int left, int right)
+{
+    int p = arr[right];
+    int i = (left - 1);
+  
+    for (int j = left; j <= right - 1; j++)
+    {
+        if (arr[j] < p)
+        {
+            i++;
+            swap(&arr[i], &arr[j]);
+        }
+    }
+    swap(&arr[i + 1], &arr[right]);
+    return (i + 1);
+}
+
+void myQuickSort(int arr[], int left, int right)
+{
+    if (left < right)
+    {
+        int p = partition(arr, left, right);
+        
+        myQuickSort(arr, left, p - 1);
+        myQuickSort(arr, p + 1, right);
+    }
+}
+
+void printArray(int arr[], int size)
+{
+    for (int i = 0; i < size; i++)
+        cout << arr[i] << " ";
+    cout << endl;
+}
+  
+int main()
+{
+    srand((unsigned int)time(NULL));
+    
+    const int N = 10;
+    int arr[N];
+    for (int i=0; i<N; i++)
+    {
+        arr[i] = rand()%100;
+    }
+    
+    cout << "Non sorted array: \n";
+    printArray(arr, N);
+    
+    myQuickSort(arr, 0, N-1);
+    
+    cout << "Sorted array: \n";
+    printArray(arr, N);
+    
+    return 0;
+}
